@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const connectDB = require('./src/config/db');
 const setupSwagger = require('./src/config/swagger');
 const authRoutes = require('./src/routes/authRoutes');
+const productRoutes = require('./src/routes/productRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
 
 // Swagger Documentation UI
 setupSwagger(app);
