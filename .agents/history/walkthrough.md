@@ -1,12 +1,17 @@
-# Walkthrough - Implementing Auth APIs - Login & Register
+# Walkthrough - Full-Stack Product Management APIs & UI
 
-## Summary of Work Done
-- **User Model**: Created [user.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/src/models/user.js) Mongoose schema with `name`, `email` (unique, lowercase), `password`, and timestamps.
-- **DAO Abstraction**: Created [userDao.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/src/dao/userDao.js) implementing `findByEmail`, `createUser`, and `findById`.
-- **Validators**: Added [authValidation.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/src/utils/authValidation.js) containing `registerValidators` and `loginValidators` using `express-validator`.
-- **Controller Logic**: Implemented [authController.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/src/controllers/authController.js) with `register` and `login` handlers (password hashing via `bcryptjs`, JWT token generation, HTTP-only cookie setting).
-- **Routes & Swagger Docs**: Created [authRoutes.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/src/routes/authRoutes.js) with full OpenAPI annotations, configured [swagger.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/src/config/swagger.js), and mounted `/auth` and `/api-docs` in [server.js](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-server/server.js).
+## Summary of Accomplishments
+
+### Backend API Support (`expiry-date-manager-server`)
+- Supported barcode and manual entry endpoints (`POST /products` & `GET /products/upc/:code`).
+- Handled deletion requests (`DELETE /products/:id`).
+- Verified field alias compatibility for `title`/`name` and `upcCode`/`barcode`.
+- Served interactive Swagger UI documentation at `http://localhost:5001/api-docs`.
+
+### Frontend Application (`expiry-date-manager-react-client`)
+- Created separate [AddProductPage.jsx](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-react-client/src/pages/AddProductPage.jsx) route at `/add-product`.
+- Integrated live camera barcode scanner [BarcodeScannerModal.jsx](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-react-client/src/components/BarcodeScannerModal.jsx) using `html5-qrcode`.
+- Added custom inline delete confirmation overlay in [ProductCard.jsx](file:///d:/Projects/Expiry-Date-Manager/expiry-date-manager-react-client/src/components/ProductCard.jsx).
 
 ## Verification
-- Verified Swagger UI endpoint `GET http://localhost:5001/api-docs/`.
-- Verified server startup and routing structure without errors.
+- Verified `npm run build` passing with zero errors.

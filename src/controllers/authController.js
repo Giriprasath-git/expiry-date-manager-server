@@ -45,7 +45,7 @@ const authController = {
             response.cookie('jwtToken', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
                 maxAge: 3600000
             });
 
@@ -107,7 +107,7 @@ const authController = {
             response.cookie('jwtToken', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
                 maxAge: 3600000
             });
 
@@ -135,7 +135,7 @@ const authController = {
             response.clearCookie('jwtToken', {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict'
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
             });
             return response.status(200).json({
                 message: 'Logged out successfully'
