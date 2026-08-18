@@ -10,18 +10,31 @@ const productRoutes = require('./src/routes/productRoutes');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+// Enable trust proxy for reverse proxies (Render, Vercel, Nginx)
+app.set('trust proxy', 1);
+
 // Connect Database
 connectDB();
+
+// Allowed Origins for CORS
+const allowedOrigins = process.env.CLIENT_URL
+    ? process.env.CLIENT_URL.split(',').map(url => url.trim())
+    : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000', 'http://127.0.0.1:5173'];
 
 // CORS Configuration with Credentials Support
 app.use(cors({
     origin: (origin, callback) => {
-        callback(null, true);
+        if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+            callback(null, true);
+        } else {
+            callback(null, true);
+        }
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
